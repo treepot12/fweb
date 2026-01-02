@@ -9,6 +9,7 @@
         textarea {
             /* border:none; */
             resize:none;
+            width:700px;
         }
         #title{
             overflow:hidden;
@@ -19,13 +20,9 @@
 <body>
     <h1 onclick="logo()">회사이름</h1>
     <hr>
-    <textarea id="title"  rows="1" cols="50" maxlength="30">
-제목
-    </textarea>
+    <textarea id="title" maxlength="20" rows="1" placeholder="제목"></textarea>
     <hr>
-    <textarea id="content"  rows="30" cols="100">
-글을 입력하십시오.
-    </textarea>
+    <textarea id="content"  rows="30" placeholder="글을 입력하십시오."></textarea>
     <p></p>
     <input onclick="subm()" type="submit" value="제출">
 </body>
@@ -41,5 +38,10 @@
             event.preventDefault();
         }
     })
+    // document.getElementById("title").addEventListener('input', function(){
+    //     if (this.value.length >30){
+    //         this.value = this.value.slice(30);
+    //     }
+    // })
 </script>
 </html>
