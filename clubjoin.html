@@ -24,6 +24,10 @@
 
         const id = document.getElementById("id").value;
         const pw = document.getElementById("pw").value;
+        if (id===""||pw===""){
+            alert("최소 한 자리 이상 입력해주세요.");
+            return;
+        }
 
         await addDoc(collection(db, "login"), {
             id,
