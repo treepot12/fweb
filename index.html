@@ -11,7 +11,8 @@
 <body>
     <a href="board.html"><button>게시판</button></a>
 </body>
-<script type="module" src="logo.js">
+<script type="module">
+    import "./logo.js";
     import { isLoged } from "./loged.js"
     if (isLoged()){
         document.getElementById("logout").style.display = "block";
