@@ -1,14 +1,15 @@
-function logo(){
+import { logout } from "./loged.js"
+window.logo = function (){
     location.href="https://treepot12.github.io/greatsune/";
 }
-function clubjoin(){
+window.clubjoin = function (){
     location.href="https://treepot12.github.io/greatsune/clubjoin.html";
 }
-function login(){
+window.login = function (){
     location.href="https://treepot12.github.io/greatsune/login.html";
 }
-import { logout } from "./loged.js"
-function logot(){
+
+window.logot = function (){
     logout();
     location.href="https://treepot12.github.io/greatsune/";
 }
