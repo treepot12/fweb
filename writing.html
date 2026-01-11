@@ -23,13 +23,15 @@
         <textarea id="title" maxlength="20" rows="1" placeholder="제목"></textarea>
         <hr>
         <textarea id="content"  rows="30" placeholder="글을 입력하십시오."></textarea>
+        <input type="file" id="f" multiple>
         <p></p>
         <input type="submit" value="제출">
     </form>
 </body>
 <script type="module">
     import "./logo.js";
-    import { addDoc, collection, serverTimestamp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js";
+    import { addDoc, collection, serverTimestamp, getFirestore } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js";
+    import { getStorage, ref, uploadBytes, getDownloadURL } from "https://www.gstatic.com/firebasejs/9.23.0/firebase-storage.js";
     import { db } from "./app.js";
     document.getElementById("title").addEventListener('keydown', function(e){
         if (e.key == 'Enter'){
@@ -41,10 +43,29 @@
 
         const title = document.getElementById("title").value;
         const content = document.getElementById("content").value;
+        const file = document.getElementById("f").files;
+
+        const upfile = [];
+
+        for (const file of files) {
+            const fileName = `${Date.now()}_${file.name}`;
+            const fileRef = ref(storage, `uploads/${fileName}`);
+
+            await uploadBytes(fileRef, file);
+            const fileURL = await getDownloadURL(fileRef);
+
+            upfile.push({
+                name: file.name,
+                url: file.url,
+                type: file.type,
+                size: file.size
+            });
+        }
 
         await addDoc(collection(db, "posts"), {
             title,
             content,
+            files: upfile,
             createdAt: serverTimestamp()
         });
 
